@@ -1,9 +1,6 @@
 import type { NextPage } from 'next'
-import { useRouter } from 'next/router'
 
-import React, { useState } from 'react'
-import { useAppDispatch } from '../hooks'
-import { chooseMakerSelection, initializeGame } from '../features/app/appSlice'
+import React from 'react'
 
 import Image from 'next/image'
 import { TypeMarkerSelection } from '../types'
@@ -23,18 +20,6 @@ import {
 } from '@chakra-ui/react'
 
 const Home: NextPage = () => {
-  const [marker, setMarker] = useState<TypeMarkerSelection>(
-    TypeMarkerSelection.CROSS,
-  )
-
-  const dispatch = useAppDispatch()
-  const router = useRouter()
-
-  const handleDispatchMarkerSelection = () => {
-    dispatch(chooseMakerSelection(marker))
-    dispatch(initializeGame())
-    router.push('/game')
-  }
   return (
     <Layout>
       <Container mt={52}>
@@ -46,7 +31,7 @@ const Home: NextPage = () => {
             <Image src="/circle.svg" width={40} height={40} alt="O" />
           </Box>
         </HStack>
-        <VStack mt={10} spacing="30px">
+        <VStack mt={6} spacing="30px">
           <Box
             bg="app.SemiDarkNavy"
             w="460px"
@@ -56,13 +41,17 @@ const Home: NextPage = () => {
           >
             <Center p={5}>
               <Text color="app.darkSilver" fontWeight="bold">
-                {/* may need to be dynamic */}
                 {"Pick Player 1's Mark".toUpperCase()}
               </Text>
             </Center>
-            <MarkerChooser marker={marker} setMarker={setMarker} />
+            <MarkerChooser />
+            <Center p={5}>
+              <Text color="app.darkSilver" fontSize={12}>
+                {'Remember X goes first'.toUpperCase()}
+              </Text>
+            </Center>
           </Box>
-          <PlayerButton onMarkerSelection={handleDispatchMarkerSelection} />
+          <PlayerButton />
         </VStack>
       </Container>
     </Layout>

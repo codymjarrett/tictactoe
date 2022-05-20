@@ -1,19 +1,21 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from '../../store'
-import { TypeMarkerSelection } from '../../types'
+import { TypeMarkerSelection, TypePlayer } from '../../types'
 
 interface AppState {
   initialMakerSelection: TypeMarkerSelection | null
   playerOne: TypeMarkerSelection | null
   playerTwo: TypeMarkerSelection | null
   matrix: Array<null | 'X' | 'O'>
+  turn: TypePlayer.PLAYER_ONE | TypePlayer.PLAYER_TWO | null
 }
 
 const initialState: AppState = {
-  initialMakerSelection: null,
+  initialMakerSelection: TypeMarkerSelection.CROSS,
   playerOne: null,
   playerTwo: null,
   matrix: [null, null, null, null, null, null, null, null, null],
+  turn: null,
 }
 
 export const appSlice = createSlice({
@@ -32,6 +34,11 @@ export const appSlice = createSlice({
         state.initialMakerSelection === TypeMarkerSelection.CROSS
           ? TypeMarkerSelection.CIRCLE
           : TypeMarkerSelection.CROSS
+
+      state.turn =
+        state.playerOne === TypeMarkerSelection.CROSS
+          ? TypePlayer.PLAYER_ONE
+          : TypePlayer.PLAYER_TWO
     },
   },
 })

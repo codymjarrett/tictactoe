@@ -1,10 +1,18 @@
 import { Box, Flex, Text } from '@chakra-ui/react'
+import { useAppDispatch } from '../hooks'
+import { useRouter } from 'next/router'
 
-const PlayerButton = ({
-  onMarkerSelection,
-}: {
-  onMarkerSelection: () => void
-}) => {
+import { initializeGame } from '../features/app/appSlice'
+
+const PlayerButton = () => {
+  const dispatch = useAppDispatch()
+  const router = useRouter()
+
+  const handleOnPlayButton = () => {
+    dispatch(initializeGame())
+    router.push('/game')
+  }
+
   return (
     <Box
       bg="app.lightBlue"
@@ -15,7 +23,7 @@ const PlayerButton = ({
       _hover={{ backgroundColor: 'app.semiLightBlue' }}
     >
       <Flex alignItems="center" justifyContent="center" h="full">
-        <button onClick={onMarkerSelection}>
+        <button onClick={handleOnPlayButton}>
           <Text color="app.darkNavy" fontWeight="bold" fontSize="lg">
             {'New Game (VS Player)'.toUpperCase()}
           </Text>
