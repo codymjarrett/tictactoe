@@ -6,12 +6,14 @@ interface AppState {
   initialMakerSelection: TypeMarkerSelection | null
   playerOne: TypeMarkerSelection | null
   playerTwo: TypeMarkerSelection | null
+  matrix: Array<null | 'X' | 'O'>
 }
 
 const initialState: AppState = {
   initialMakerSelection: null,
   playerOne: null,
   playerTwo: null,
+  matrix: [null, null, null, null, null, null, null, null, null],
 }
 
 export const appSlice = createSlice({

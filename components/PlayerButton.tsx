@@ -6,7 +6,14 @@ const PlayerButton = ({
   onMarkerSelection: () => void
 }) => {
   return (
-    <Box bg="app.lightBlue" w="460px" h="67px" borderRadius="xl">
+    <Box
+      bg="app.lightBlue"
+      w="460px"
+      h="67px"
+      borderRadius="xl"
+      style={{ boxShadow: '#118C87 1px 10px 0px -1px' }}
+      _hover={{ backgroundColor: 'app.semiLightBlue' }}
+    >
       <Flex alignItems="center" justifyContent="center" h="full">
         <button onClick={onMarkerSelection}>
           <Text color="app.darkNavy" fontWeight="bold" fontSize="lg">
