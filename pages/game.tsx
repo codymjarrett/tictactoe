@@ -1,6 +1,7 @@
 import React from 'react'
 import type { NextPage } from 'next'
 import { useAppSelector } from '../hooks'
+import styled from 'styled-components'
 
 import { Box, Grid, GridItem, HStack, Text } from '@chakra-ui/react'
 import Image from 'next/image'
@@ -10,6 +11,29 @@ import Layout from '../components/Layout'
 import { selectMarkerTurn } from '../selectors'
 
 import { TypeMarkerSelection, TypePlayer } from '../types'
+
+const MarkerHoverButton = styled.button`
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: 60px;
+  background-position: center;
+
+  transition: hover 2s ease-in-out;
+  &:hover {
+    animation: backgroundIMG 200ms ease-in;
+    animation-fill-mode: forwards;
+  }
+
+  @keyframes backgroundIMG {
+    100% {
+      background-image: ${({ marker }) =>
+        marker === TypeMarkerSelection.CIRCLE
+          ? "url('/circle.svg')"
+          : "url('/circle.svg')"};
+    }
+  }
+`
 
 const NextMarkerOrder = ({
   markerTurn,
@@ -70,7 +94,7 @@ const GameMatrixHeader = () => {
         bg="app.darkSilver"
         borderRadius="xl"
         w={14}
-        style={{ boxShadow: '#DBE8ED 0px 5px 0px -1px' }}
+        style={{ boxShadow: '#6B8997 0px 5px 0px -1px' }}
         ml="auto"
       >
         <HStack alignItems="center" height="full" justifyContent="center">
@@ -92,7 +116,7 @@ const GameMatrixFooter = () => {
 
 const GameMatrix = () => {
   const matrix = useAppSelector((state) => state.app.matrix)
-  const matrixLength = matrix.length
+  const markerTurn = useAppSelector((state) => selectMarkerTurn(state))
 
   return (
     <Grid
@@ -108,7 +132,9 @@ const GameMatrix = () => {
           borderRadius="xl"
           key={idx}
           style={{ boxShadow: '#10212A 0px 5px 0px -1px' }}
-        />
+        >
+          <MarkerHoverButton marker={markerTurn} />
+        </GridItem>
       ))}
       <GameMatrixFooter />
     </Grid>
