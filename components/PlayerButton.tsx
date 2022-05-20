@@ -19,7 +19,7 @@ const PlayerButton = () => {
       w="460px"
       h="67px"
       borderRadius="xl"
-      style={{ boxShadow: '#118C87 1px 10px 0px -1px' }}
+      style={{ boxShadow: '#118C87 0px 5px 0px -1px' }}
       _hover={{ backgroundColor: 'app.semiLightBlue' }}
     >
       <Flex alignItems="center" justifyContent="center" h="full">

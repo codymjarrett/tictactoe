@@ -9,15 +9,7 @@ import MarkerChooser from '../components/MarkerChooser'
 import PlayerButton from '../components/PlayerButton'
 import Layout from '../components/Layout'
 
-import {
-  Box,
-  Container,
-  Flex,
-  Center,
-  HStack,
-  Text,
-  VStack,
-} from '@chakra-ui/react'
+import { Box, Container, Center, HStack, Text, VStack } from '@chakra-ui/react'
 
 const Home: NextPage = () => {
   return (
@@ -37,7 +29,7 @@ const Home: NextPage = () => {
             w="460px"
             h="205px"
             borderRadius="xl"
-            style={{ boxShadow: '#10212A 1px 10px 0px -1px' }}
+            style={{ boxShadow: '#10212A 0px 5px 0px -1px' }}
           >
             <Center p={5}>
               <Text color="app.darkSilver" fontWeight="bold">
