@@ -1,6 +1,6 @@
 import React from 'react'
 import type { NextPage } from 'next'
-import { useAppSelector } from '../hooks'
+import { useAppSelector, useAppDispatch } from '../hooks'
 import styled from 'styled-components'
 
 import { Box, Grid, GridItem, HStack, Text } from '@chakra-ui/react'
@@ -9,28 +9,41 @@ import Image from 'next/image'
 import Layout from '../components/Layout'
 
 import { selectMarkerTurn } from '../selectors'
+import { makeBoardSelection } from '../features/app/appSlice'
 
 import { TypeMarkerSelection, TypePlayer } from '../types'
 
-const MarkerHoverButton = styled.button`
+interface MarkerHoverButtonProps {
+  marker: TypeMarkerSelection
+  isSelected: boolean
+}
+
+const MARKERMAP = {
+  [TypeMarkerSelection.CIRCLE]: "url('/circle.svg')",
+  [TypeMarkerSelection.CROSS]: "url('/cross.svg')",
+}
+
+const MarkerHoverButton = styled.button<MarkerHoverButtonProps>`
   width: 100%;
   height: 100%;
   background-repeat: no-repeat;
   background-size: 60px;
   background-position: center;
 
-  transition: hover 2s ease-in-out;
+  background-image: ${({ isSelected, marker }) => {
+    console.log({ isSelected })
+
+    return isSelected && MARKERMAP[marker]
+  }};
+
   &:hover {
-    animation: backgroundIMG 200ms ease-in;
+    animation: backgroundIMG 100ms ease-in 100ms;
     animation-fill-mode: forwards;
   }
 
   @keyframes backgroundIMG {
     100% {
-      background-image: ${({ marker }) =>
-        marker === TypeMarkerSelection.CIRCLE
-          ? "url('/circle.svg')"
-          : "url('/circle.svg')"};
+      background-image: ${({ marker }) => MARKERMAP[marker]};
     }
   }
 `
@@ -115,8 +128,15 @@ const GameMatrixFooter = () => {
 }
 
 const GameMatrix = () => {
+  const dispatch = useAppDispatch()
   const matrix = useAppSelector((state) => state.app.matrix)
   const markerTurn = useAppSelector((state) => selectMarkerTurn(state))
+
+  console.log({ matrix })
+
+  const handleBoardSelection = (index, marker) => {
+    dispatch(makeBoardSelection({ index, marker }))
+  }
 
   return (
     <Grid
@@ -133,7 +153,11 @@ const GameMatrix = () => {
           key={idx}
           style={{ boxShadow: '#10212A 0px 5px 0px -1px' }}
         >
-          <MarkerHoverButton marker={markerTurn} />
+          <MarkerHoverButton
+            marker={markerTurn}
+            isSelected={matrix[idx] !== null}
+            onClick={() => handleBoardSelection(idx, markerTurn)}
+          />
         </GridItem>
       ))}
       <GameMatrixFooter />

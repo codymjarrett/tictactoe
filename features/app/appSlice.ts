@@ -40,9 +40,13 @@ export const appSlice = createSlice({
           ? TypePlayer.PLAYER_ONE
           : TypePlayer.PLAYER_TWO
     },
+    makeBoardSelection: (state, action) => {
+      state.matrix[action.payload.index] = action.payload.marker
+    },
   },
 })
 
-export const { chooseMakerSelection, initializeGame } = appSlice.actions
+export const { chooseMakerSelection, initializeGame, makeBoardSelection } =
+  appSlice.actions
 
 export default appSlice.reducer
