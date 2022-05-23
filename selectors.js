@@ -4,14 +4,14 @@ const selectTurn = (state) => state?.app.turn
 const selectPlayerOneMarker = (state) => state?.app.playerOne
 const selectPlayerTwoMarker = (state) => state?.app.playerTwo
 
-import { TypeMarkerSelection, TypePlayer } from './types'
+import { TypePlayer } from './types'
 
 export const selectMarkerTurn = createSelector(
   selectTurn,
   selectPlayerOneMarker,
   selectPlayerTwoMarker,
   (turn, playerOneMarker, playerTwoMarker) => {
-    console.log(turn)
+    console.log(`turn is ${turn}`)
     if (turn === TypePlayer.PLAYER_ONE) {
       return playerOneMarker
     }

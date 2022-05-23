@@ -23,7 +23,7 @@ const PlayerButton = () => {
       _hover={{ backgroundColor: 'app.semiLightBlue' }}
     >
       <Flex alignItems="center" justifyContent="center" h="full">
-        <button onClick={handleOnPlayButton}>
+        <button onClick={handleOnPlayButton} style={{ width: '100%' }}>
           <Text color="app.darkNavy" fontWeight="bold" fontSize="lg">
             {'New Game (VS Player)'.toUpperCase()}
           </Text>

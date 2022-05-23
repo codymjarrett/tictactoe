@@ -6,16 +6,16 @@ import Image from 'next/image'
 
 import { Box, Center, Flex } from '@chakra-ui/react'
 
-import { TypeMarkerSelection } from '../types'
+import { TypeMarkerType } from '../types'
 
 const MarkerChooser = () => {
   const dispatch = useAppDispatch()
 
   const isCross = useAppSelector(
-    (state) => state.app.initialMakerSelection === TypeMarkerSelection.CROSS,
+    (state) => state.app.initialMakerSelection === TypeMarkerType.CROSS,
   )
 
-  const handleDispatchMarkerSelection = (marker: TypeMarkerSelection) => {
+  const handleDispatchMarkerSelection = (marker: TypeMarkerType) => {
     dispatch(chooseMakerSelection(marker))
   }
 
@@ -37,7 +37,7 @@ const MarkerChooser = () => {
               <button
                 style={{ width: '100%' }}
                 onClick={() =>
-                  handleDispatchMarkerSelection(TypeMarkerSelection.CROSS)
+                  handleDispatchMarkerSelection(TypeMarkerType.CROSS)
                 }
               >
                 <Image
@@ -61,7 +61,7 @@ const MarkerChooser = () => {
               <button
                 style={{ width: '100%' }}
                 onClick={() =>
-                  handleDispatchMarkerSelection(TypeMarkerSelection.CIRCLE)
+                  handleDispatchMarkerSelection(TypeMarkerType.CIRCLE)
                 }
               >
                 <Image

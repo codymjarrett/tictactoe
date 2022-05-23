@@ -3,7 +3,6 @@ import type { NextPage } from 'next'
 import React from 'react'
 
 import Image from 'next/image'
-import { TypeMarkerSelection } from '../types'
 
 import MarkerChooser from '../components/MarkerChooser'
 import PlayerButton from '../components/PlayerButton'
