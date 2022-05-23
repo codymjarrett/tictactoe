@@ -4,7 +4,9 @@ export enum TypePlayer {
 }
 
 export enum TypeMarkerState {
+  INITIAL = 'INITIAL',
   FINAL = 'FINAL',
+  PENDING_REDO = 'PENDING_REDO',
   REDO = 'REDO',
 }
 
@@ -14,7 +16,7 @@ export enum TypeMarkerType {
 }
 
 export interface TypeMarker {
-  type: TypeMarkerType
+  type: TypeMarkerType | ''
   state: TypeMarkerState
   id: number
 }
