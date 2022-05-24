@@ -1,6 +1,7 @@
 import { TypeMarkerType, TypePlayer, TypeMarker } from '../../types'
 
 export interface AppState {
+  gameStarted: boolean
   initialMakerSelection: TypeMarkerType | ''
   playerOne: TypeMarkerType | ''
   playerTwo: TypeMarkerType | ''

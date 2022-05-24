@@ -1,4 +1,5 @@
 import React from 'react'
+import { useRouter } from 'next/router'
 import type { NextPage } from 'next'
 import { useAppSelector } from '../hooks'
 
@@ -12,12 +13,23 @@ import Marker from '../components/Marker'
 
 import MarkerHoverButton from '../components/MarkerHoverButton'
 
-import { selectMarkerTurn } from '../selectors'
+import { selectMarkerTurn, selectGameStarted } from '../selectors'
 import { TypeMarkerType } from '../types'
 
 const GameMatrixHeader = () => {
   const markerTurn = useAppSelector((state) => selectMarkerTurn(state))
+  const isGameStarted = useAppSelector((state) => selectGameStarted(state))
   const isCross = markerTurn === TypeMarkerType.CROSS
+
+  const router = useRouter()
+
+  React.useEffect(() => {
+    // prevents the user from going directly to /game without starting a game
+    if (!isGameStarted) {
+      router.push('/')
+    }
+  }, [isGameStarted, router])
+
   return (
     <React.Fragment>
       <NextMarkerOrder markerTurn={markerTurn} />

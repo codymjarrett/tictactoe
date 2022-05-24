@@ -3,7 +3,11 @@ import { useAppSelector, useAppDispatch } from '../hooks'
 import styled, { css } from 'styled-components'
 
 import { selectMarkerTurn, selectPreviousPlayIndex } from '../selectors'
-import { makeBoardSelection, goToNextTurn } from '../features/app/appSlice'
+import {
+  makeBoardSelection,
+  goToNextTurn,
+  determineAWin,
+} from '../features/app/appSlice'
 import { TypeMarkerType, TypeMarkerState } from '../types'
 import { MARKERMAP } from '../constants'
 
@@ -59,6 +63,8 @@ const MarkerHoverButton = ({
         previousPlayIndex,
       }),
     )
+    dispatch(determineAWin())
+    // TODO this shouldn't run in there's a winner
     dispatch(goToNextTurn())
   }
 

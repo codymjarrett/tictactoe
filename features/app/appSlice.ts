@@ -2,6 +2,8 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { TypeMarkerType, TypePlayer, TypeMarkerState } from '../../types'
 import isNumber from 'lodash.isnumber'
 
+import { determineIfPermutationIsFilled } from '../../utils'
+
 // for debugging purposes
 import { current } from '@reduxjs/toolkit'
 
@@ -12,6 +14,7 @@ import {
 } from './types'
 
 const initialState: AppState = {
+  gameStarted: false,
   initialMakerSelection: TypeMarkerType.CROSS,
   playerOne: '',
   playerTwo: '',
@@ -28,6 +31,7 @@ export const appSlice = createSlice({
       state.initialMakerSelection = action.payload
     },
     initializeGame: (state) => {
+      state.gameStarted = true
       state.playerOne = state.initialMakerSelection
       state.playerTwo =
         state.initialMakerSelection === TypeMarkerType.CROSS
@@ -103,6 +107,9 @@ export const appSlice = createSlice({
           ? TypePlayer.PLAYER_TWO
           : TypePlayer.PLAYER_ONE
     },
+    determineAWin: (state) => {
+      determineIfPermutationIsFilled(state.matrix)
+    },
   },
 })
 
@@ -114,6 +121,7 @@ export const {
   hoverInRedoMarkerAction,
   hoverOutRedoMarkerAction,
   executeRedo,
+  determineAWin,
 } = appSlice.actions
 
 export default appSlice.reducer

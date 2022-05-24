@@ -2,6 +2,7 @@ import { createSelector } from '@reduxjs/toolkit'
 import { TypeMarkerType, TypePlayer } from './types'
 import type { RootState } from './store'
 
+export const selectGameStarted = (state: RootState) => state?.app.gameStarted
 export const selectTurn = (state: RootState) => state?.app.turn
 export const selectPlayerOneMarker = (state: RootState): TypeMarkerType | '' =>
   state?.app.playerOne
