@@ -55,7 +55,6 @@ const MarkerHoverButton = ({
     dispatch(
       makeBoardSelection({
         type: marker,
-        state: TypeMarkerState.INITIAL,
         id: index,
         previousPlayIndex,
       }),

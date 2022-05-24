@@ -1,5 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { TypeMarkerType, TypePlayer, TypeMarkerState } from '../../types'
+import isNumber from 'lodash.isnumber'
+
+// for debugging purposes
+import { current } from '@reduxjs/toolkit'
 
 import {
   AppState,
@@ -39,16 +43,18 @@ export const appSlice = createSlice({
       state,
       action: PayloadAction<MakeBoardSelectionPayloadAction>,
     ) => {
-      const { id, type, state: markerState, previousPlayIndex } = action.payload
-      state.matrix[id] = { id, type, state: markerState }
+      const { id, type, previousPlayIndex } = action.payload
+      state.matrix[id] = { id, type, state: TypeMarkerState.INITIAL }
+      state.stack.push(id)
 
-      if (previousPlayIndex) {
-        state.matrix[previousPlayIndex] = {
-          ...state.matrix[previousPlayIndex],
-          state: TypeMarkerState.FINAL,
+      if (isNumber(previousPlayIndex)) {
+        const previousPlay = state.matrix.find(
+          (i) => i?.id === previousPlayIndex,
+        )
+        if (previousPlay) {
+          previousPlay.state = TypeMarkerState.FINAL
         }
       }
-      state.stack.push(id)
     },
     goToNextTurn: (state) => {
       if (state.turn === TypePlayer.PLAYER_ONE) {
@@ -62,10 +68,10 @@ export const appSlice = createSlice({
       action: PayloadAction<HoverRedoMarkerPayloadAction>,
     ) => {
       const { previousPlayIndex } = action.payload
-      console.log(`${previousPlayIndex} from slice`)
-      state.matrix[previousPlayIndex] = {
-        ...state.matrix[previousPlayIndex],
-        state: TypeMarkerState.PENDING_REDO,
+      const previousPlay = state.matrix.find((i) => i?.id === previousPlayIndex)
+
+      if (previousPlay) {
+        previousPlay.state = TypeMarkerState.PENDING_REDO
       }
     },
     hoverOutRedoMarkerAction: (
@@ -73,10 +79,29 @@ export const appSlice = createSlice({
       action: PayloadAction<HoverRedoMarkerPayloadAction>,
     ) => {
       const { previousPlayIndex } = action.payload
-      state.matrix[previousPlayIndex] = {
-        ...state.matrix[previousPlayIndex],
-        state: TypeMarkerState.INITIAL,
+      const previousPlay = state.matrix.find((i) => i?.id === previousPlayIndex)
+
+      if (previousPlay) {
+        previousPlay.state = TypeMarkerState.INITIAL
       }
+    },
+    executeRedo: (
+      state,
+      action: PayloadAction<HoverRedoMarkerPayloadAction>,
+    ) => {
+      const { previousPlayIndex } = action.payload
+
+      //this should be the last index in the stack so...
+      state.stack.pop()
+      // immer is wild for this one
+      state.matrix[previousPlayIndex] = null
+
+      // reset the turn to be ther previous turn
+      const currentTurn = state.turn
+      state.turn =
+        currentTurn === TypePlayer.PLAYER_ONE
+          ? TypePlayer.PLAYER_TWO
+          : TypePlayer.PLAYER_ONE
     },
   },
 })
@@ -88,6 +113,7 @@ export const {
   goToNextTurn,
   hoverInRedoMarkerAction,
   hoverOutRedoMarkerAction,
+  executeRedo,
 } = appSlice.actions
 
 export default appSlice.reducer
