@@ -14,6 +14,9 @@ export const selectPreviousPlayIndex = (state: RootState) =>
 export const selectStack = (state: RootState) => state?.app.stack
 export const selectMatrixItem = (index: number) => (state: RootState) =>
   state?.app.matrix[index]
+export const selectWinnerDetermined = (state: RootState) =>
+  state?.app.winnerDetermined
+export const selectWinner = (state: RootState) => state?.app.winner
 
 export const selectMarkerTurn = createSelector(
   selectTurn,

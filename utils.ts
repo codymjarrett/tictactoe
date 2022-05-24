@@ -51,14 +51,12 @@ const determineIfFilledPermutationIsOneMarkerType = (
   if (
     matrixPermutationItems.every((matrixItem) => matrixItem?.type === 'CROSS')
   ) {
-    console.log('CROSS won')
-    return true
+    return TypeMarkerType.CROSS
   }
   if (
     matrixPermutationItems.every((matrixItem) => matrixItem?.type === 'CIRCLE')
   ) {
-    console.log('CIRCLE won')
-    return
+    return TypeMarkerType.CIRCLE
   }
 
   return false

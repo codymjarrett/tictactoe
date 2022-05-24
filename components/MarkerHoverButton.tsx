@@ -72,7 +72,6 @@ const MarkerHoverButton = ({
     <React.Fragment>
       <Button
         onClick={() => handleBoardSelection(matrixId)}
-        onMouseOver={() => console.log({ marker })}
         marker={marker}
         isSelected={matrix[matrixId] !== null}
       >

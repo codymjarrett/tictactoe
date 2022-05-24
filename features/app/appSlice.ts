@@ -15,6 +15,8 @@ import {
 
 const initialState: AppState = {
   gameStarted: false,
+  winnerDetermined: false,
+  winner: '',
   initialMakerSelection: TypeMarkerType.CROSS,
   playerOne: '',
   playerTwo: '',
@@ -108,7 +110,16 @@ export const appSlice = createSlice({
           : TypePlayer.PLAYER_ONE
     },
     determineAWin: (state) => {
-      determineIfPermutationIsFilled(state.matrix)
+      const determinedWinner = determineIfPermutationIsFilled(state.matrix)
+
+      if (determinedWinner) {
+        state.winnerDetermined = true
+        state.winner = determinedWinner
+      }
+    },
+    quitGame: () => {
+      // again weird - https://redux-toolkit.js.org/usage/immer-reducers#resetting-and-replacing-state
+      return initialState
     },
   },
 })
@@ -122,6 +133,7 @@ export const {
   hoverOutRedoMarkerAction,
   executeRedo,
   determineAWin,
+  quitGame,
 } = appSlice.actions
 
 export default appSlice.reducer

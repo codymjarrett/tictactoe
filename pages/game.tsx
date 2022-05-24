@@ -3,17 +3,23 @@ import { useRouter } from 'next/router'
 import type { NextPage } from 'next'
 import { useAppSelector } from '../hooks'
 
-import { Box, Grid, GridItem, HStack, Text } from '@chakra-ui/react'
+import { Box, Button, Grid, GridItem, HStack, Text } from '@chakra-ui/react'
 import Image from 'next/image'
 
 import Layout from '../components/Layout'
 import RedoButton from '../components/RedoButton'
 import NextMarkerOrder from '../components/NextMarkerOrder'
 import Marker from '../components/Marker'
+import WinnerModal from '../components/WinnerModal'
 
 import MarkerHoverButton from '../components/MarkerHoverButton'
 
-import { selectMarkerTurn, selectGameStarted } from '../selectors'
+import {
+  selectMarkerTurn,
+  selectGameStarted,
+  selectWinnerDetermined,
+  selectMatrix,
+} from '../selectors'
 import { TypeMarkerType } from '../types'
 
 const GameMatrixHeader = () => {
@@ -65,7 +71,7 @@ const GameMatrixFooter = () => {
 }
 
 const GameMatrix = () => {
-  const matrix = useAppSelector((state) => state.app.matrix)
+  const matrix = useAppSelector(selectMatrix)
 
   return (
     <Grid
@@ -97,6 +103,7 @@ const Game: NextPage = () => {
     <Layout>
       <Box mt={52}>
         <GameMatrix />
+        <WinnerModal />
       </Box>
     </Layout>
   )
