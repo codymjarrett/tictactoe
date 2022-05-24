@@ -2,7 +2,11 @@ import Image from 'next/image'
 import { Box, GridItem, HStack } from '@chakra-ui/react'
 import { TypeMarkerType } from '../types'
 
-const NextMarkerOrder = ({ markerTurn }: { markerTurn: TypeMarkerType }) => {
+const NextMarkerOrder = ({
+  markerTurn,
+}: {
+  markerTurn: TypeMarkerType | ''
+}) => {
   const isCross = markerTurn === TypeMarkerType.CROSS
 
   return (

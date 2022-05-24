@@ -8,7 +8,7 @@ import { TypeMarkerType, TypeMarkerState } from '../types'
 import { MARKERMAP } from '../constants'
 
 interface ButtonProps {
-  marker: TypeMarkerType
+  marker: TypeMarkerType | ''
   isSelected: boolean
 }
 
