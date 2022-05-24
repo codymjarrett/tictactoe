@@ -2,7 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 
 import { useAppSelector, useAppDispatch } from '../hooks'
-import { quitGame } from '../features/app/appSlice'
+import { resetGame } from '../features/app/appSlice'
 import { selectWinner, selectWinnerDetermined } from '../selectors'
 import {
   Box,
@@ -27,7 +27,7 @@ const WinnerModal = () => {
   const isCross = winner === TypeMarkerType.CROSS
 
   const handleQuit = () => {
-    dispatch(quitGame())
+    dispatch(resetGame())
   }
   const handleNextRound = () => {}
 

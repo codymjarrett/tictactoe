@@ -4,6 +4,9 @@ import React from 'react'
 
 import Image from 'next/image'
 
+import { useAppDispatch } from '../hooks'
+import { resetGame } from '../features/app/appSlice'
+
 import MarkerChooser from '../components/MarkerChooser'
 import PlayerButton from '../components/PlayerButton'
 import Layout from '../components/Layout'
@@ -11,6 +14,11 @@ import Layout from '../components/Layout'
 import { Box, Container, Center, HStack, Text, VStack } from '@chakra-ui/react'
 
 const Home: NextPage = () => {
+  const dispatch = useAppDispatch()
+  React.useEffect(() => {
+    // we should always reset the store when this page is hit to avoid backspacing and still having live state
+    dispatch(resetGame())
+  })
   return (
     <Layout>
       <Container mt={52}>

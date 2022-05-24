@@ -117,7 +117,7 @@ export const appSlice = createSlice({
         state.winner = determinedWinner
       }
     },
-    quitGame: () => {
+    resetGame: () => {
       // again weird - https://redux-toolkit.js.org/usage/immer-reducers#resetting-and-replacing-state
       return initialState
     },
@@ -133,7 +133,7 @@ export const {
   hoverOutRedoMarkerAction,
   executeRedo,
   determineAWin,
-  quitGame,
+  resetGame,
 } = appSlice.actions
 
 export default appSlice.reducer

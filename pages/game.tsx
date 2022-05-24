@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import type { NextPage } from 'next'
 import { useAppSelector } from '../hooks'
 
-import { Box, Button, Grid, GridItem, HStack, Text } from '@chakra-ui/react'
+import { Box, Grid, GridItem, HStack, Text } from '@chakra-ui/react'
 import Image from 'next/image'
 
 import Layout from '../components/Layout'
