@@ -17,7 +17,11 @@ export const selectMatrixItem = (index: number) => (state: RootState) =>
 export const selectWinnerDetermined = (state: RootState) =>
   state?.app.winnerDetermined
 export const selectWinner = (state: RootState) => state?.app.winner
-
+export const selectPlayerOneWins = (state: RootState) =>
+  state?.app.playerOneWins
+export const selectPlayerTwoWins = (state: RootState) =>
+  state?.app.playerTwoWins
+export const selectTies = (state: RootState) => state?.app.ties
 export const selectMarkerTurn = createSelector(
   selectTurn,
   selectPlayerOneMarker,

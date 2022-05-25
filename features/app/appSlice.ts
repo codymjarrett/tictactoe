@@ -23,6 +23,9 @@ const initialState: AppState = {
   matrix: [null, null, null, null, null, null, null, null, null],
   turn: null,
   stack: [],
+  playerOneWins: 0,
+  playerTwoWins: 0,
+  ties: 0,
 }
 
 export const appSlice = createSlice({
@@ -116,12 +119,30 @@ export const appSlice = createSlice({
       if (isMatrixCompletelyFilled && !determinedWinner) {
         state.winnerDetermined = true
         state.winner = 'tie'
+        // this feels so dirty
+        state.ties++
         return
       }
 
       if (determinedWinner) {
         state.winnerDetermined = true
         state.winner = determinedWinner
+        // I hate all these ifs but it is what it is
+
+        if (determinedWinner === TypeMarkerType.CROSS) {
+          if (state.playerOne === TypeMarkerType.CROSS) {
+            state.playerOneWins++
+          } else if (state.playerTwo === TypeMarkerType.CROSS) {
+            state.playerTwoWins++
+          }
+        }
+        if (determinedWinner === TypeMarkerType.CIRCLE) {
+          if (state.playerOne === TypeMarkerType.CIRCLE) {
+            state.playerOneWins++
+          } else if (state.playerTwo === TypeMarkerType.CIRCLE) {
+            state.playerTwoWins++
+          }
+        }
       }
     },
     resetGame: () => {

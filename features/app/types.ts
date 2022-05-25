@@ -10,6 +10,9 @@ export interface AppState {
   matrix: Array<TypeMarker | null>
   turn: TypePlayer.PLAYER_ONE | TypePlayer.PLAYER_TWO | null
   stack: number[]
+  playerOneWins: number
+  playerTwoWins: number
+  ties: number
 }
 
 export interface MakeBoardSelectionPayloadAction {

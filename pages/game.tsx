@@ -3,7 +3,16 @@ import { useRouter } from 'next/router'
 import type { NextPage } from 'next'
 import { useAppSelector } from '../hooks'
 
-import { Box, Grid, GridItem, Image, HStack, Text } from '@chakra-ui/react'
+import {
+  Box,
+  Center,
+  Grid,
+  GridItem,
+  Image,
+  HStack,
+  Text,
+  VStack,
+} from '@chakra-ui/react'
 
 import Layout from '../components/Layout'
 import RedoButton from '../components/RedoButton'
@@ -12,6 +21,13 @@ import Marker from '../components/Marker'
 import WinnerModal from '../components/WinnerModal'
 
 import MarkerHoverButton from '../components/MarkerHoverButton'
+
+import {
+  selectPlayerOneMarker,
+  selectPlayerOneWins,
+  selectPlayerTwoWins,
+  selectTies,
+} from '../selectors'
 
 import {
   selectMarkerTurn,
@@ -59,11 +75,68 @@ const GameMatrixHeader = () => {
   )
 }
 const GameMatrixFooter = () => {
+  const playerOneMarker = useAppSelector(selectPlayerOneMarker)
+  const playerOneWins = useAppSelector(selectPlayerOneWins)
+  const playerTwoWins = useAppSelector(selectPlayerTwoWins)
+  const ties = useAppSelector(selectTies)
+
   return (
     <React.Fragment>
-      <GridItem>h</GridItem>
-      <GridItem>h</GridItem>
-      <GridItem>h</GridItem>
+      <GridItem
+        bg="app.lightBlue"
+        borderRadius="xl"
+        h="72px"
+        style={{ boxShadow: '#10212A 0px 5px 0px -1px' }}
+      >
+        <Center p={2}>
+          <VStack>
+            <Box>
+              <Text align="center">
+                X {playerOneMarker === TypeMarkerType.CROSS ? '(P1)' : '(P2)'}
+              </Text>
+              <Text align="center" fontSize="2xl" fontWeight="bold">
+                {playerOneWins}
+              </Text>
+            </Box>
+          </VStack>
+        </Center>
+      </GridItem>
+      <GridItem
+        bg="app.darkSilver"
+        borderRadius="xl"
+        h="72px"
+        style={{ boxShadow: '#10212A 0px 5px 0px -1px' }}
+      >
+        <Center p={2}>
+          <VStack>
+            <Box>
+              <text align="center">TIES</text>
+              <Text align="center" fontSize="2xl" fontWeight="bold">
+                {ties}
+              </Text>
+            </Box>
+          </VStack>
+        </Center>
+      </GridItem>
+      <GridItem
+        bg="app.yellow"
+        borderRadius="xl"
+        h="72px"
+        style={{ boxShadow: '#10212A 0px 5px 0px -1px' }}
+      >
+        <Center p={2}>
+          <VStack>
+            <Box>
+              <Text align="center">
+                O {playerOneMarker === TypeMarkerType.CIRCLE ? '(P1)' : '(P2)'}
+              </Text>
+              <Text align="center" fontSize="2xl" fontWeight="bold">
+                {playerTwoWins}
+              </Text>
+            </Box>
+          </VStack>
+        </Center>
+      </GridItem>
     </React.Fragment>
   )
 }
