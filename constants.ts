@@ -1,6 +1,8 @@
 import { TypeMarkerType, TypeMarkerState } from './types'
 
 export const MARKERMAP = {
+  [TypeMarkerType.CIRCLE]: '/circle.svg',
+  [TypeMarkerType.CROSS]: '/cross.svg',
   [`${TypeMarkerState.INITIAL}_${TypeMarkerType.CIRCLE}`]: '/circle.svg',
   [`${TypeMarkerState.INITIAL}_${TypeMarkerType.CROSS}`]: '/cross.svg',
   [`${TypeMarkerState.FINAL}_${TypeMarkerType.CIRCLE}`]: '/circle.svg',

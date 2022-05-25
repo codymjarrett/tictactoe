@@ -20,7 +20,7 @@ import NextMarkerOrder from '../components/NextMarkerOrder'
 import Marker from '../components/Marker'
 import WinnerModal from '../components/WinnerModal'
 
-import MarkerHoverButton from '../components/MarkerHoverButton'
+import MarkerButton from '../components/MarkerButton'
 
 import {
   selectPlayerOneMarker,
@@ -38,8 +38,8 @@ import {
 import { TypeMarkerType } from '../types'
 
 const GameMatrixHeader = () => {
-  const markerTurn = useAppSelector((state) => selectMarkerTurn(state))
-  const isGameStarted = useAppSelector((state) => selectGameStarted(state))
+  const markerTurn = useAppSelector(selectMarkerTurn)
+  const isGameStarted = useAppSelector(selectGameStarted)
   const isCross = markerTurn === TypeMarkerType.CROSS
 
   const router = useRouter()
@@ -159,9 +159,9 @@ const GameMatrix = () => {
           key={idx}
           style={{ boxShadow: '#10212A 0px 5px 0px -1px' }}
         >
-          <MarkerHoverButton matrixId={idx}>
+          <MarkerButton matrixId={idx}>
             <Marker matrixId={idx} />
-          </MarkerHoverButton>
+          </MarkerButton>
         </GridItem>
       ))}
       <GameMatrixFooter />

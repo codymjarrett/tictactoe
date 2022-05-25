@@ -45,7 +45,7 @@ export const determineIfPermutationIsFilled = (
   }
 }
 
-const determineIfFilledPermutationIsOneMarkerType = (
+export const determineIfFilledPermutationIsOneMarkerType = (
   matrixPermutationItems: Array<TypeMarker | null>,
 ) => {
   if (
