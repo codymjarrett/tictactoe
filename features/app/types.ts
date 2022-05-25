@@ -3,7 +3,7 @@ import { TypeMarkerType, TypePlayer, TypeMarker } from '../../types'
 export interface AppState {
   gameStarted: boolean
   winnerDetermined: boolean
-  winner: TypeMarkerType | ''
+  winner: TypeMarkerType | 'tie' | ''
   initialMakerSelection: TypeMarkerType | ''
   playerOne: TypeMarkerType | ''
   playerTwo: TypeMarkerType | ''

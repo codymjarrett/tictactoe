@@ -1,5 +1,4 @@
-import { GridItem, HStack, Tooltip } from '@chakra-ui/react'
-import Image from 'next/image'
+import { GridItem, HStack, Image, Tooltip } from '@chakra-ui/react'
 
 import { useAppSelector, useAppDispatch } from '../hooks'
 import {
@@ -72,7 +71,7 @@ const RedoButton = () => {
           disabled={isFinalState}
         >
           <HStack alignItems="center" height="full" justifyContent="center">
-            <Image src="/redo.svg" width={22} height={22} alt="redo" />
+            <Image src="/redo.svg" boxSize="22px" alt="redo" />
           </HStack>
         </button>
       </Tooltip>

@@ -3,8 +3,7 @@ import { useRouter } from 'next/router'
 import type { NextPage } from 'next'
 import { useAppSelector } from '../hooks'
 
-import { Box, Grid, GridItem, HStack, Text } from '@chakra-ui/react'
-import Image from 'next/image'
+import { Box, Grid, GridItem, Image, HStack, Text } from '@chakra-ui/react'
 
 import Layout from '../components/Layout'
 import RedoButton from '../components/RedoButton'
@@ -47,8 +46,7 @@ const GameMatrixHeader = () => {
         <HStack alignItems="center" height="full" justifyContent="center">
           <Image
             src={isCross ? '/silver-cross.svg' : '/silver-circle.svg'}
-            width={22}
-            height={22}
+            boxSize="22px"
             alt={isCross ? 'X' : 'O'}
           />
           <Text color="app.darkSilver" fontSize="14" fontWeight="bold">

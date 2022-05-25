@@ -1,7 +1,8 @@
 import React from 'react'
-import Image from 'next/image'
 import { useAppSelector } from '../hooks'
 import { MARKERMAP } from '../constants'
+
+import { Image } from '@chakra-ui/react'
 
 import { selectMatrixItem } from '../selectors'
 
@@ -16,13 +17,14 @@ const Marker = ({ matrixId }: { matrixId: number }) => {
 
     const marker = `${matrixItemState}_${matrixItemType}`
 
+    const isCross = matrixItemType === TypeMarkerType.CROSS
+
     return (
       <React.Fragment>
         <Image
           src={MARKERMAP[marker]}
-          width="60px"
-          height="60px"
-          // alt={isCross ? 'X' : 'O'}
+          boxSize="60px"
+          alt={isCross ? 'X' : 'O'}
         />
       </React.Fragment>
     )

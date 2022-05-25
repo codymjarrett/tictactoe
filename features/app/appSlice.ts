@@ -111,6 +111,13 @@ export const appSlice = createSlice({
     },
     determineAWin: (state) => {
       const determinedWinner = determineIfPermutationIsFilled(state.matrix)
+      const isMatrixCompletelyFilled = state.matrix.every((i) => i !== null)
+
+      if (isMatrixCompletelyFilled && !determinedWinner) {
+        state.winnerDetermined = true
+        state.winner = 'tie'
+        return
+      }
 
       if (determinedWinner) {
         state.winnerDetermined = true

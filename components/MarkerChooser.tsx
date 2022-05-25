@@ -2,9 +2,7 @@ import React from 'react'
 import { useAppDispatch, useAppSelector } from '../hooks'
 import { chooseMakerSelection } from '../features/app/appSlice'
 
-import Image from 'next/image'
-
-import { Box, Center, Flex } from '@chakra-ui/react'
+import { Box, Center, Flex, Image } from '@chakra-ui/react'
 
 import { TypeMarkerType } from '../types'
 
@@ -35,15 +33,19 @@ const MarkerChooser = () => {
               })}
             >
               <button
-                style={{ width: '100%' }}
+                style={{
+                  width: '100%',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
                 onClick={() =>
                   handleDispatchMarkerSelection(TypeMarkerType.CROSS)
                 }
               >
                 <Image
                   src={isCross ? '/dark-cross.svg' : '/silver-cross.svg'}
-                  width={30}
-                  height={30}
+                  boxSize="30px"
                   alt="X"
                 />
               </button>
@@ -59,15 +61,19 @@ const MarkerChooser = () => {
               })}
             >
               <button
-                style={{ width: '100%' }}
+                style={{
+                  width: '100%',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
                 onClick={() =>
                   handleDispatchMarkerSelection(TypeMarkerType.CIRCLE)
                 }
               >
                 <Image
                   src={!isCross ? '/dark-circle.svg' : '/silver-circle.svg'}
-                  width={30}
-                  height={30}
+                  boxSize="30px"
                   alt="O"
                 />
               </button>

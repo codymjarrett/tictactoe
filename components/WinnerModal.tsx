@@ -1,5 +1,4 @@
 import React from 'react'
-import Image from 'next/image'
 
 import { useAppSelector, useAppDispatch } from '../hooks'
 import { resetGame } from '../features/app/appSlice'
@@ -7,6 +6,7 @@ import { selectWinner, selectWinnerDetermined } from '../selectors'
 import {
   Box,
   Center,
+  Image,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -19,12 +19,47 @@ import {
 
 import { TypeMarkerType } from '../types'
 
+const getWinnerContent = (winner: TypeMarkerType | 'tie' | '') => {
+  const isCross = winner === TypeMarkerType.CROSS
+
+  return (
+    <Center>
+      {winner === 'tie' ? (
+        <Text
+          fontSize={{ base: 25, md: 50 }}
+          ml={6}
+          color="app.silver"
+          fontWeight="bold"
+          letterSpacing={2}
+        >
+          {'round tied'.toUpperCase()}
+        </Text>
+      ) : (
+        <React.Fragment>
+          <Image
+            src={isCross ? '/cross.svg' : '/circle.svg'}
+            alt={isCross ? 'X' : 'O'}
+            boxSize={{ base: 45, md: 65 }}
+          />
+          <Text
+            fontSize={{ base: 25, md: 50 }}
+            ml={6}
+            color={isCross ? 'app.lightBlue' : 'app.yellow'}
+            fontWeight="bold"
+            letterSpacing={2}
+          >
+            {'takes the round'.toUpperCase()}
+          </Text>
+        </React.Fragment>
+      )}
+    </Center>
+  )
+}
+
 const WinnerModal = () => {
   const dispatch = useAppDispatch()
   const winner = useAppSelector(selectWinner)
   const hasWinnerDetermined = useAppSelector(selectWinnerDetermined)
-
-  const isCross = winner === TypeMarkerType.CROSS
 
   const handleQuit = () => {
     dispatch(resetGame())
@@ -34,35 +69,12 @@ const WinnerModal = () => {
   return (
     <Modal isOpen={hasWinnerDetermined} isCentered>
       <ModalOverlay />
-      <ModalContent
-        // position="absolute"
-        // left="0"
-        // right="0"
-        h="260px"
-        maxW="100%"
-        bg="app.SemiDarkNavy"
-      >
-        <ModalBody mt={12}>
-          <Center>
-            <Image
-              src={isCross ? '/cross.svg' : '/circle.svg'}
-              alt={isCross ? 'X' : 'O'}
-              width={60}
-              height={60}
-            />
-            <Text
-              fontSize={50}
-              ml={6}
-              color={isCross ? 'app.lightBlue' : 'app.yellow'}
-              fontWeight="bold"
-              letterSpacing={2}
-            >
-              {'takes the round'.toUpperCase()}
-            </Text>
-          </Center>
+      <ModalContent h="260px" maxW="100%" bg="app.SemiDarkNavy">
+        <ModalBody mt={{ base: 20, md: 12 }}>
+          {getWinnerContent(winner)}
         </ModalBody>
 
-        <ModalFooter>
+        <ModalFooter pb={8}>
           <Center w="full">
             <Box
               w="76px"

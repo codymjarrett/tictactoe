@@ -1,5 +1,4 @@
-import Image from 'next/image'
-import { Box, GridItem, HStack } from '@chakra-ui/react'
+import { Box, GridItem, HStack, Image } from '@chakra-ui/react'
 import { TypeMarkerType } from '../types'
 
 const NextMarkerOrder = ({
@@ -15,16 +14,14 @@ const NextMarkerOrder = ({
         <Box>
           <Image
             src={isCross ? '/cross.svg' : '/circle.svg'}
-            width={35}
-            height={35}
+            boxSize="35px"
             alt="X"
           />
         </Box>
         <Box>
           <Image
             src={isCross ? '/circle.svg' : '/cross.svg'}
-            width={35}
-            height={35}
+            boxSize="35px"
             alt="O"
           />
         </Box>

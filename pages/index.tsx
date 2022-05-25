@@ -2,8 +2,6 @@ import type { NextPage } from 'next'
 
 import React from 'react'
 
-import Image from 'next/image'
-
 import { useAppDispatch } from '../hooks'
 import { resetGame } from '../features/app/appSlice'
 
@@ -11,7 +9,15 @@ import MarkerChooser from '../components/MarkerChooser'
 import PlayerButton from '../components/PlayerButton'
 import Layout from '../components/Layout'
 
-import { Box, Container, Center, HStack, Text, VStack } from '@chakra-ui/react'
+import {
+  Box,
+  Container,
+  Center,
+  HStack,
+  Image,
+  Text,
+  VStack,
+} from '@chakra-ui/react'
 
 const Home: NextPage = () => {
   const dispatch = useAppDispatch()
@@ -24,10 +30,10 @@ const Home: NextPage = () => {
       <Container mt={52}>
         <HStack spacing="24px" justify="center">
           <Box>
-            <Image src="/cross.svg" width={40} height={40} alt="X" />
+            <Image src="/cross.svg" boxSize="40px" alt="X" />
           </Box>
           <Box>
-            <Image src="/circle.svg" width={40} height={40} alt="O" />
+            <Image src="/circle.svg" boxSize="40px" alt="O" />
           </Box>
         </HStack>
         <VStack mt={6} spacing="30px">

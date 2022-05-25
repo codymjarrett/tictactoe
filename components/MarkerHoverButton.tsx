@@ -19,6 +19,9 @@ interface ButtonProps {
 const Button = styled.button<ButtonProps>`
   width: 100%;
   height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-repeat: no-repeat;
   background-size: 60px;
   background-position: center;
