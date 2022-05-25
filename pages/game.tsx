@@ -29,12 +29,7 @@ import {
   selectTies,
 } from '../selectors'
 
-import {
-  selectMarkerTurn,
-  selectGameStarted,
-  selectWinnerDetermined,
-  selectMatrix,
-} from '../selectors'
+import { selectMarkerTurn, selectGameStarted, selectMatrix } from '../selectors'
 import { TypeMarkerType } from '../types'
 
 const GameMatrixHeader = () => {

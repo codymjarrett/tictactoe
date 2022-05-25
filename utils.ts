@@ -1,4 +1,4 @@
-import { TypeMarkerType, TypePlayer, TypeMarker } from './types'
+import { TypeMarkerType, TypeMarker } from './types'
 
 /* 
       there are 8 win permutations
