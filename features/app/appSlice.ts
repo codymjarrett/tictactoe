@@ -149,6 +149,24 @@ export const appSlice = createSlice({
       // again weird - https://redux-toolkit.js.org/usage/immer-reducers#resetting-and-replacing-state
       return initialState
     },
+    goToNextRound: (state) => {
+      return {
+        ...initialState,
+        winnerDetermined: false,
+        playerOneWins: state.playerOneWins,
+        playerTwoWins: state.playerTwoWins,
+        playerOne: state.playerOne,
+        playerTwo: state.playerTwo,
+        ties: state.ties,
+        gameStarted: true,
+        // because X always goes first
+        turn:
+          state.playerOne === TypeMarkerType.CROSS
+            ? TypePlayer.PLAYER_ONE
+            : TypePlayer.PLAYER_TWO,
+        // initialMakerSelection:
+      }
+    },
   },
 })
 
@@ -162,6 +180,7 @@ export const {
   executeRedo,
   determineAWin,
   resetGame,
+  goToNextRound,
 } = appSlice.actions
 
 export default appSlice.reducer

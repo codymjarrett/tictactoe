@@ -110,7 +110,7 @@ const GameMatrixFooter = () => {
         <Center p={2}>
           <VStack>
             <Box>
-              <text align="center">TIES</text>
+              <Text align="center">TIES</Text>
               <Text align="center" fontSize="2xl" fontWeight="bold">
                 {ties}
               </Text>

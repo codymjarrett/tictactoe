@@ -51,8 +51,6 @@ const RedoButton = () => {
     }
 
     return 'Redo play'
-
-    return ''
   }
   return (
     <GridItem

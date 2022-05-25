@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { useAppSelector, useAppDispatch } from '../hooks'
-import { resetGame } from '../features/app/appSlice'
+import { resetGame, goToNextRound } from '../features/app/appSlice'
 import { selectWinner, selectWinnerDetermined } from '../selectors'
 import {
   Box,
@@ -12,9 +12,7 @@ import {
   ModalContent,
   ModalFooter,
   ModalBody,
-  ModalCloseButton,
   Text,
-  VStack,
 } from '@chakra-ui/react'
 
 import { TypeMarkerType } from '../types'
@@ -64,10 +62,12 @@ const WinnerModal = () => {
   const handleQuit = () => {
     dispatch(resetGame())
   }
-  const handleNextRound = () => {}
+  const handleNextRound = () => {
+    dispatch(goToNextRound())
+  }
 
   return (
-    <Modal isOpen={hasWinnerDetermined} isCentered>
+    <Modal isOpen={hasWinnerDetermined} isCentered onClose={handleQuit}>
       <ModalOverlay />
       <ModalContent h="260px" maxW="100%" bg="app.SemiDarkNavy">
         <ModalBody mt={{ base: 20, md: 12 }}>
