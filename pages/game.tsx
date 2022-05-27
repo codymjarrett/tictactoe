@@ -155,7 +155,6 @@ const GameMatrix = () => {
       <Grid
         h="461px"
         templateRows={`${responsiveTemplateRows}`}
-        // templateColumns={`repeat(3, ${isLargerThan468 ? '140px' : '60%'})`}
         templateColumns={`${responsiveTemplateColumns}`}
         gap={4}
       >
