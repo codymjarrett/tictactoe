@@ -141,7 +141,6 @@ const GameMatrix = () => {
   const matrix = useAppSelector(selectMatrix)
 
   const [isLargerThan468] = useMediaQuery('(min-width: 468px)')
-  console.log({ isLargerThan468 })
 
   const responsiveTemplateRows = isLargerThan468
     ? '50px 140px 140px 140px'
@@ -180,8 +179,10 @@ const GameMatrix = () => {
 }
 
 const Game: NextPage = () => {
+  const [isLargerThan468] = useMediaQuery('(min-width: 468px)')
+
   return (
-    <Container mt={52}>
+    <Container mt={isLargerThan468 ? 52 : 20}>
       <Center>
         <GameMatrix />
         <WinnerModal />
