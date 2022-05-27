@@ -20,7 +20,7 @@ const MarkerChooser = () => {
   return (
     <React.Fragment>
       <Center>
-        <Box bg="app.darkNavy" borderRadius="xl" width="412px" height="72px">
+        <Box bg="app.darkNavy" borderRadius="xl" w="90%" height="72px">
           <Flex alignItems="center" justifyContent="space-around" h="full">
             <Flex
               justifyContent="center"

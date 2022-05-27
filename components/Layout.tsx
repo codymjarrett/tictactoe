@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Box, Center } from '@chakra-ui/react'
+import { Center, Container } from '@chakra-ui/react'
 
 const Layout = ({
   children,
@@ -8,9 +8,9 @@ const Layout = ({
   children: React.ReactNode | React.ReactNode[]
 }) => {
   return (
-    <Box bg="app.darkNavy" h="100vh">
+    <Container>
       <Center>{children}</Center>
-    </Box>
+    </Container>
   )
 }
 

@@ -6,15 +6,16 @@ import { useAppSelector } from '../hooks'
 import {
   Box,
   Center,
+  Container,
   Grid,
   GridItem,
   Image,
   HStack,
   Text,
+  useMediaQuery,
   VStack,
 } from '@chakra-ui/react'
 
-import Layout from '../components/Layout'
 import RedoButton from '../components/RedoButton'
 import NextMarkerOrder from '../components/NextMarkerOrder'
 import Marker from '../components/Marker'
@@ -139,39 +140,53 @@ const GameMatrixFooter = () => {
 const GameMatrix = () => {
   const matrix = useAppSelector(selectMatrix)
 
+  const [isLargerThan468] = useMediaQuery('(min-width: 468px)')
+  console.log({ isLargerThan468 })
+
+  const responsiveTemplateRows = isLargerThan468
+    ? '50px 140px 140px 140px'
+    : '30px 110px 110px 110px'
+
+  const responsiveTemplateColumns = isLargerThan468
+    ? 'repeat(3, 140px)'
+    : 'repeat(3, 100px)'
+
   return (
-    <Grid
-      h="461px"
-      templateRows="50px 140px 140px 140px"
-      templateColumns={`repeat(3, 140px)`}
-      gap={4}
-    >
-      <GameMatrixHeader />
-      {matrix.map((_, idx) => (
-        <GridItem
-          bg="app.SemiDarkNavy"
-          borderRadius="xl"
-          key={idx}
-          style={{ boxShadow: '#10212A 0px 5px 0px -1px' }}
-        >
-          <MarkerButton matrixId={idx}>
-            <Marker matrixId={idx} />
-          </MarkerButton>
-        </GridItem>
-      ))}
-      <GameMatrixFooter />
-    </Grid>
+    <Box>
+      <Grid
+        h="461px"
+        templateRows={`${responsiveTemplateRows}`}
+        // templateColumns={`repeat(3, ${isLargerThan468 ? '140px' : '60%'})`}
+        templateColumns={`${responsiveTemplateColumns}`}
+        gap={4}
+      >
+        <GameMatrixHeader />
+        {matrix.map((_, idx) => (
+          <GridItem
+            bg="app.SemiDarkNavy"
+            borderRadius="xl"
+            key={idx}
+            style={{ boxShadow: '#10212A 0px 5px 0px -1px' }}
+          >
+            <MarkerButton matrixId={idx}>
+              <Marker matrixId={idx} />
+            </MarkerButton>
+          </GridItem>
+        ))}
+        <GameMatrixFooter />
+      </Grid>
+    </Box>
   )
 }
 
 const Game: NextPage = () => {
   return (
-    <Layout>
-      <Box mt={52}>
+    <Container mt={52}>
+      <Center>
         <GameMatrix />
         <WinnerModal />
-      </Box>
-    </Layout>
+      </Center>
+    </Container>
   )
 }
 

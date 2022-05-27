@@ -16,7 +16,8 @@ const PlayerButton = () => {
   return (
     <Box
       bg="app.lightBlue"
-      w="460px"
+      w="100%"
+      // w="460px"
       h="67px"
       borderRadius="xl"
       style={{ boxShadow: '#118C87 0px 5px 0px -1px' }}
